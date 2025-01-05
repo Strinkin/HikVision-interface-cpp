@@ -2,6 +2,10 @@
 海康威视c++二次开发
 
 # 使用说明
+- 执行以下命令下载yaml-cpp到本地
+```shell
+sudo apt install libyaml-cpp-dev
+```
 - 克隆仓库到本地
 - 进入example目录
 - 执行命令
