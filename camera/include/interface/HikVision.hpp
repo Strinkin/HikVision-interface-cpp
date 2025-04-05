@@ -27,11 +27,12 @@ class HikVision {
 
         virtual void startGrabing() = 0;
         virtual void bindImage(unsigned char** img_ptr, int step) = 0;
+        /* 有一定开销，改为子类单独实现
         virtual void getOneFrame(
             unsigned char* img_ptr, 
             int step, 
             int time_out ) = 0;
-
+        */
         void stopGrabing() { nRet = MV_CC_StopGrabbing(handle); }
     public:
         MV_FRAME_OUT_INFO_EX* getImageInfo() { return &stImageInfo; };

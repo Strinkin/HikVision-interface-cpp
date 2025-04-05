@@ -20,14 +20,15 @@ class HikGeneral : public HikVision {
         void getOneFrame(
             unsigned char* img_ptr = nullptr, 
             int step = 0, 
-            int time_out = 100) override;
+            int time_out = 100);
 };
 
+/**
+ * @override
+ * @param data_host: cv::Mat->ptr()
+*/
 void HikGeneral::startGrabing() {
-    /**
-     * @override
-     * @param data_host: cv::Mat->ptr()
-    */
+
     // 开始取流
     HikVision::nRet = MV_CC_StartGrabbing(HikVision::handle);
 
@@ -55,10 +56,10 @@ void HikGeneral::bindImage(unsigned char** img_ptr, int step) {
     } while(1);
 }
 
+/**
+ * @details 通用版本不需要使用前两个参数
+*/
 void HikGeneral::getOneFrame(unsigned char* img_ptr, int step, int time_out) {
-    /**
-     * @details 通用版本不需要使用前两个参数
-    */
     HikVision::nRet = MV_CC_GetOneFrameTimeout(HikVision::handle, HikVision::pData, nDataSize, &stImageInfo, time_out);
     if (HikVision::nRet == MV_OK) {
         // printf("GetOneFrame, Width[%d], Height[%d], nFrameNum[%d]\n", 
