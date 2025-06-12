@@ -3,7 +3,8 @@
  * @date: 2024-8-16
  * 从yaml文件获取参数
 */
-#pragma once
+#ifndef __GETPARAM_HPP__
+#define __GETPARAM_HPP__
 //STD
 #include <iostream>
 #include <string>
@@ -120,3 +121,5 @@ inline T getParam(const std::string& param_name, const std::string& yaml_file_pa
 
     return T{}; // Return a default-constructed T if no valid data is found
 }
+
+#endif // __GETPARAM_HPP__

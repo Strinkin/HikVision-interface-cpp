@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __HIKVISION_HPP__
+#define __HIKVISION_HPP__
 /**
  * @author: strinkin
  * @date: 2025-1-6
@@ -33,9 +34,9 @@ class HikVision {
             int step, 
             int time_out ) = 0;
         */
-        void stopGrabing() { nRet = MV_CC_StopGrabbing(handle); }
+        void stopGrabing();
     public:
-        MV_FRAME_OUT_INFO_EX* getImageInfo() { return &stImageInfo; };
+        MV_FRAME_OUT_INFO_EX* getImageInfo(); // 获取图像信息
 };
 
 bool HikVision::initCamera() {
@@ -59,8 +60,7 @@ bool HikVision::initCamera() {
     if (stDeviceList.nDeviceNum > 0) {
         printf("[device %d]:\n", stDeviceList.nDeviceNum-1);     
     } else {
-        printf("Find No Devices!\n");
-        exit(-1);
+        throw std::runtime_error("Find No Devices!");
     }
     
     // 选择设备并创建句柄
@@ -125,7 +125,18 @@ void HikVision::setCameraParams() {
 
 }
 
+MV_FRAME_OUT_INFO_EX* HikVision::getImageInfo() { 
+    return &stImageInfo; 
+}
+
+void HikVision::stopGrabing() { 
+    nRet = MV_CC_StopGrabbing(handle); 
+}
+
 bool HikVision::releaseCamera() {
+    // 停止抓取
+    stopGrabing();
+
     // 关闭设备
     nRet = MV_CC_CloseDevice(handle);
 
@@ -140,3 +151,5 @@ bool HikVision::releaseCamera() {
 }
 
 } // namespace camera
+
+#endif // CAMERA_HIKVISION_HPP
