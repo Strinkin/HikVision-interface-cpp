@@ -1,6 +1,9 @@
 # HikVision-interface-cpp
 海康威视c++二次开发
-
+# 环境要求
+`yaml-cpp`
+`OpenCV4`
+`C++17`
 # 使用说明
 - 执行以下命令下载yaml-cpp到本地
 ```shell
